@@ -1,0 +1,45 @@
+version: "0.1.0"
+
+dimensions:
+  service_process:
+    raw_max_score: 25
+    weight: 20
+    items:
+      - {id: SP-01, name: "热情迎接", max_score: 5}
+      - {id: SP-02, name: "了解需求", max_score: 5}
+      - {id: SP-03, name: "完整回复", max_score: 5}
+      - {id: SP-04, name: "正确标签", max_score: 5}
+      - {id: SP-05, name: "礼貌送客", max_score: 5}
+
+  professional_service:
+    raw_max_score: 50
+    weight: 40
+    items:
+      - {id: PS-01, name: "分析问题并解答", max_score: 30}
+      - {id: PS-02, name: "服务意识", max_score: 10}
+      - {id: PS-03, name: "沟通反馈", max_score: 10}
+
+  communication:
+    raw_max_score: 25
+    weight: 40
+    items:
+      - {id: CM-01, name: "规范用语", max_score: 5}
+      - {id: CM-02, name: "语言文字规范", max_score: 5}
+      - {id: CM-03, name: "接入时效", max_score: 5}
+      - {id: CM-04, name: "回复时效", max_score: 5}
+      - {id: CM-05, name: "转接规范", max_score: 5}
+
+grades:
+  excellent: {min_inclusive: 90, label: "优秀"}
+  qualified: {min_inclusive: 60, max_exclusive: 90, label: "合格"}
+  serious_issue: {max_exclusive: 60, label: "严重问题"}
+  redline: {label: "严重不合格"}
+  manual_review: {label: "待人工复核"}
+
+policies:
+  redline_short_circuit: true
+  cross_dimension_deduplication: true
+  technical_error_as_zero_score: false
+  unknown_parent_tag: manual_review
+  missing_timing_data: not_evaluable
+
