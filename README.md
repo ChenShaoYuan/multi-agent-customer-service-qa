@@ -50,7 +50,7 @@ multi-agent-customer-service-qa/
 
 ## Next step
 
-第二周从输入和 Schema 开始：创建 Python 项目配置，实现输入适配器、确定性预检、红线主控和条件路由。当前 `src/` 与 `tests/` 仅保留边界说明，不提前实现后续周内容。
+第二周从输入和 Schema 开始，实现输入适配器、确定性预检、红线主控和条件路由。当前 `src/` 仅包含最小 Python 包，`tests/` 只验证第一周数据与配置，不提前实现后续业务节点。
 
 ## Local development
 
