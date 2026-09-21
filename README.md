@@ -4,7 +4,7 @@
 
 ## Current status
 
-当前完成 **Week 1：业务规则梳理与工作流设计**，尚未进入业务代码开发。
+当前完成 **Week 2：确定性预检与主控红线拦截**。
 
 已完成：
 
@@ -14,6 +14,11 @@
 - 全链路 State Schema；
 - 评分、评级和预检配置草案；
 - 后续三周目录和工作边界。
+- 正式消息与历史 `comments` 输入适配；
+- 14项确定性预检；
+- 结构化红线 Agent、重试和人工复核降级；
+- `pass/blocked/review` LangGraph 条件路由；
+- 节点轨迹和技术错误记录。
 
 ## Project layout
 
@@ -50,7 +55,23 @@ multi-agent-customer-service-qa/
 
 ## Next step
 
-第二周从输入和 Schema 开始，实现输入适配器、确定性预检、红线主控和条件路由。当前 `src/` 仅包含最小 Python 包，`tests/` 只验证第一周数据与配置，不提前实现后续业务节点。
+第三周将从 `ready_for_dimension_audit` 分支接入服务流程、专业服务和沟通规范三个并行评分 Agent。当前代码已经完成输入、预检和红线门控，尚未计算三维得分。
+
+## Week 2 demo
+
+无需模型密钥即可查看确定性预检：
+
+```powershell
+.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0 --preflight-only
+```
+
+在 `.env` 中填写 `LLM_API_KEY` 后可以运行完整红线门控：
+
+```powershell
+.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0
+```
+
+完整实现与边界见 [Week 2 implementation](docs/week2/README.md)。
 
 ## Local development
 
