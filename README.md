@@ -1,89 +1,71 @@
 # Multi-Agent Customer Service Quality Audit
 
-基于 LangGraph 的多 Agent 客服质检项目。
+基于 LangGraph 的多 Agent 客服质检项目，已实现四周工程任务：输入适配、确定性预检、红线门控、三维并行评分、ReAct 汇总、加权评级、反馈、异常降级、HTTP MCP 规则服务与真实数据评测。
 
-## Current status
+模型理解语义，Python 校验证据并计算分数。最终结果分为 `completed`、`blocked`、`manual_review`；资料不足和技术失败不会被当成客服零分。
 
-当前完成 **Week 2：确定性预检与主控红线拦截**。
+## 运行完整流程
 
-已完成：
-
-- 客服质检规则映射；
-- 红线和确定性预检边界；
-- LangGraph 节点、条件路由与并行拓扑；
-- 全链路 State Schema；
-- 评分、评级和预检配置草案；
-- 后续三周目录和工作边界。
-- 正式消息与历史 `comments` 输入适配；
-- 14项确定性预检；
-- 结构化红线 Agent、重试和人工复核降级；
-- `pass/blocked/review` LangGraph 条件路由；
-- 节点轨迹和技术错误记录。
-
-## Project layout
-
-```text
-multi-agent-customer-service-qa/
-├── configs/                 # 第一周确定的评分和预检配置草案
-├── data/raw/                # 原始样例和专业规则，只读基线
-├── docs/
-│   ├── project-roadmap.md   # 四周整体工作内容
-│   ├── week1/               # 第一周全部交付物
-│   ├── week2/               # 后续：预检与红线开发
-│   ├── week3/               # 后续：三维 Agent 开发
-│   └── week4/               # 后续：汇总、MCP 与评测
-├── reference/               # 原始 Prompt，仅作参考
-├── src/                     # 第二周开始编写代码
-└── tests/                   # 第二周开始增加测试
-```
-
-## Week 1 deliverables
-
-1. [技术方案](docs/week1/technical-plan.md)
-2. [客服质检规则映射表](docs/week1/rule-mapping.md)
-3. [预检规则清单与触发条件](docs/week1/preflight-rules.md)
-4. [LangGraph 工作流拓扑](docs/week1/workflow-design.md)
-5. [State 数据结构规范](docs/week1/state-schema.md)
-6. [第一周验收清单](docs/week1/acceptance-checklist.md)
-
-## Data notes
-
-- `sample-conversations.json` 包含100条样例。
-- 原始样例的 `messages` 为空，实际对话保存在 `comments`。
-- 样例没有消息角色和时间戳，只能用于流程开发，不能直接验证接入和回复时效。
-- `professional-rules.json` 包含22个父业务分类的专业规则。
-
-## Next step
-
-第三周将从 `ready_for_dimension_audit` 分支接入服务流程、专业服务和沟通规范三个并行评分 Agent。当前代码已经完成输入、预检和红线门控，尚未计算三维得分。
-
-## Week 2 demo
-
-无需模型密钥即可查看确定性预检：
+使用 Python 3.11，在项目根目录执行：
 
 ```powershell
-.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0 --preflight-only
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+Copy-Item .env.example .env  # 仅首次配置，已有.env不要覆盖
+.\.venv\Scripts\python.exe -m customer_service_qa --demo --format markdown --output outputs/week4-demo.md
 ```
 
-在 `.env` 中填写 `LLM_API_KEY` 后可以运行完整红线门控：
+离线演示使用固定答案，得分96，评级优秀。真实运行先填写 `.env`，参见 [模型连接](docs/model-connection.md)，再执行：
 
 ```powershell
-.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0
+.\.venv\Scripts\python.exe -m customer_service_qa --input docs/week4/examples/input.json --output outputs/week4-live.json --log-output logs/audit-events.jsonl
 ```
 
-完整实现与边界见 [Week 2 implementation](docs/week2/README.md)。
+默认执行第四周完整工作流；`--week 2`、`--week 3` 保留阶段入口。`--preflight-only` 只做确定性预检。JSON 和 Markdown 分别运行会分别调用模型；同一次结果的排版转换使用 `reporting.render_markdown()`。
 
-## Local development
+## HTTP MCP 与批量评测
 
-项目使用 Python 3.11，通过 `pyproject.toml` 管理运行和开发依赖。
+终端一启动本机规则服务：
 
 ```powershell
-& "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe" -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -e ".[dev]"
-python -m pytest
-python -m ruff check .
+.\.venv\Scripts\python.exe -m customer_service_qa.mcp_server
 ```
 
-复制 `.env.example` 为 `.env` 后填写本地模型密钥。不要提交 `.env`。完整说明见 [Local setup](docs/local-setup.md)。
+终端二执行真实历史会话评测，成功记录可断点续跑：
+
+```powershell
+.\.venv\Scripts\python.exe -m customer_service_qa.evaluation --rules-transport mcp --output outputs/week4/history --workers 2 --resume
+```
+
+已保存的评测要求源码、配置、输入及运行模式一致；修改后应使用新的输出目录。详见 [MCP 服务](docs/week4/mcp-service.md) 与 [真实评测报告](docs/week4/evaluation-report.md)。
+
+## 四周交付
+
+| 周次 | 已完成内容 | 文档 |
+| --- | --- | --- |
+| 第一周 | 规则映射、预检清单、State、图设计、技术方案 | [设计与验收](docs/week1/acceptance-checklist.md) |
+| 第二周 | 输入适配、14项预检、红线Agent、条件路由、轨迹 | [第二周](docs/week2/README.md) |
+| 第三周 | 三维Agent、22类专业规则、评分证据校验、并行与隔离 | [第三周](docs/week3/README.md) |
+| 第四周 | ReAct汇总、去重、评级反馈、降级告警、MCP、真实跑批 | [第四周及总验收](docs/week4/README.md) |
+
+总分 = 服务流程原始分/25×20 + 专业服务原始分/50×40 + 沟通规范原始分/25×40。跨维度同一问题先按可审计策略去重，再计算总分。≥90优秀，60～<90合格，<60严重问题；红线独立判为严重不合格。
+
+## 目录与数据边界
+
+- `src/customer_service_qa/`：运行代码；`configs/`：评分、预检和汇总策略。
+- `data/raw/`：原始100条历史样本与22类专业规则；`data/evaluation/`：12条规则参考用例。
+- `docs/week1/`～`docs/week4/`：阶段设计、实现、示例及验收证据。
+- `scripts/`：接口检查、参考用例及示例生成；`tests/`：离线与真实本地HTTP测试。
+- `.env`、`outputs/`、`logs/`：本地密钥、逐条评测结果、事件日志，均不提交Git。
+
+原始历史数据没有明确角色与时间戳。角色采用标注过的推断，缺失时效信息会转人工复核。参考用例是根据规则编写的合成预期，未经人工独立标注，参考一致率与格式通过率均不代表真实业务准确率。
+
+## 验证
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest --cov=customer_service_qa --cov-report=term-missing
+.\.venv\Scripts\python.exe -m ruff check .
+.\.venv\Scripts\python.exe scripts/generate_week4_examples.py
+```
+
+依赖范围见 `pyproject.toml`；`requirements.lock` 为本次 Windows/Python 3.11 环境快照，含 Windows 专用依赖，其他系统优先按 pyproject 安装。部署范围是本地命令行与本机 MCP 服务，尚未提供公网鉴权、人工审核界面或生产数据库。

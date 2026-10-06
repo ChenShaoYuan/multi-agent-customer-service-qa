@@ -42,9 +42,7 @@ def test_pass_route_is_ready_for_week_three() -> None:
 
 
 def test_blocked_route_short_circuits_dimension_audit() -> None:
-    result = build_week2_graph(evaluator=_evaluator("CR-02")).invoke(
-        {"raw_input": _payload()}
-    )
+    result = build_week2_graph(evaluator=_evaluator("CR-02")).invoke({"raw_input": _payload()})
 
     assert result["gate_status"] == "blocked"
     assert result["final_audit"]["status"] == "blocked"

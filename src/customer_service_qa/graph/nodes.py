@@ -31,7 +31,18 @@ def _trace(
         retry_count=retry_count,
         rule_version=settings.rule_version,
         prompt_version=settings.prompt_version,
-        model_name=settings.llm_model if node == "critical_gate" else None,
+        model_name=(
+            settings.llm_model
+            if node
+            in (
+                "critical_gate",
+                "service_process",
+                "professional_service",
+                "communication",
+                "summary_agent",
+            )
+            else None
+        ),
         details=details or {},
     ).model_dump(mode="json")
 
@@ -109,7 +120,7 @@ def make_critical_node(
             started_at,
             started_counter,
             settings,
-            retry_count=max(0, len(errors) - 1),
+            retry_count=max(0, len(errors) - (result.gate_status == "review")),
             details={"gate_status": result.gate_status},
         )
         return {
@@ -159,7 +170,5 @@ def make_final_nodes(settings: Settings) -> dict[str, Callable[[AuditState], dic
     return {
         "blocked_result": _final_node("blocked", "严重不合格", settings),
         "manual_review_result": _final_node("manual_review", "待人工复核", settings),
-        "ready_result": _final_node(
-            "ready_for_dimension_audit", "待三维评分", settings
-        ),
+        "ready_result": _final_node("ready_for_dimension_audit", "待三维评分", settings),
     }

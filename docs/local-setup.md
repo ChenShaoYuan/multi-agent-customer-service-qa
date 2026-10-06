@@ -26,10 +26,10 @@ python -m pip install -e ".[dev]"
 ## Configure local secrets
 
 ```powershell
-Copy-Item .env.example .env
+Copy-Item .env.example .env # First setup only; preserve an existing .env
 ```
 
-Edit `.env` and provide `LLM_API_KEY`. The `.env` file is ignored by Git and must not be committed.
+Edit `.env` and provide `LLM_API_KEY` or `DASHSCOPE_API_KEY`. The `.env` file is ignored by Git and must not be committed. For the configured Qwen-compatible service see [model connection](model-connection.md).
 
 ## Validate the project
 
@@ -38,7 +38,7 @@ python -m pytest
 python -m ruff check .
 ```
 
-The initial tests verify the 100 sample conversations, 22 professional rule categories, scoring weights and preflight configuration. They do not call an LLM.
+Tests cover all four weeks and do not call an external LLM. MCP integration tests start a temporary HTTP service on localhost. Final validation and real-model results are in [Week 4](week4/evaluation-report.md).
 
 ## Git workflow
 
@@ -48,4 +48,3 @@ git switch -c feature/week2-preflight
 ```
 
 Use pull requests for mentor review so design and code changes remain visible and easy to discuss.
-

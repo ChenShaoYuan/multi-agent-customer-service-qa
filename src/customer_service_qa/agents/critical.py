@@ -30,9 +30,7 @@ class LiveCriticalEvaluator:
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
 
-    def __call__(
-        self, messages: list[Message], preflight: PreflightReport
-    ) -> RedlineAssessment:
+    def __call__(self, messages: list[Message], preflight: PreflightReport) -> RedlineAssessment:
         if not self.settings.has_llm_api_key:
             raise RuntimeError("LLM_API_KEY is not configured")
 
@@ -41,8 +39,9 @@ class LiveCriticalEvaluator:
             api_key=self.settings.llm_api_key.get_secret_value(),
             base_url=self.settings.llm_base_url,
             temperature=0,
-            timeout=30,
+            timeout=self.settings.llm_timeout_seconds,
             max_retries=0,
+            extra_body=self.settings.llm_extra_body or None,
         )
         structured_model = model.with_structured_output(
             RedlineAssessment,
@@ -61,9 +60,7 @@ class LiveCriticalEvaluator:
         return RedlineAssessment.model_validate(result)
 
 
-def _validate_assessment(
-    assessment: RedlineAssessment, messages: list[Message]
-) -> RedlineResult:
+def _validate_assessment(assessment: RedlineAssessment, messages: list[Message]) -> RedlineResult:
     rule_ids = [item.rule_id for item in assessment.items]
     if len(rule_ids) != len(EXPECTED_RULE_IDS) or set(rule_ids) != EXPECTED_RULE_IDS:
         raise ValueError("The assessment must contain each redline rule exactly once")
@@ -117,7 +114,7 @@ def evaluate_redlines(
                     "node": "critical_gate",
                     "attempt": attempt,
                     "error_type": type(error).__name__,
-                    "message": str(error)[:240],
+                    "message": "红线模型调用或结果校验失败",
                 }
             )
 

@@ -29,7 +29,7 @@ def _mask(value: str) -> str:
 
 
 def _elapsed_seconds(start: datetime, end: datetime) -> float:
-    return max(0.0, (end - start).total_seconds())
+    return (end - start).total_seconds()
 
 
 def run_preflight(
@@ -57,9 +57,7 @@ def run_preflight(
     last_agent = agents[-1] if agents else None
     greeting = PresenceCheck(
         evaluable=first_agent is not None,
-        present=(
-            _contains_any(first_agent.content, patterns["greeting"]) if first_agent else None
-        ),
+        present=(_contains_any(first_agent.content, patterns["greeting"]) if first_agent else None),
         message_id=first_agent.message_id if first_agent else None,
     )
     closing = PresenceCheck(
@@ -76,6 +74,17 @@ def run_preflight(
     if timed_messages and not timing_available:
         timing_errors.append("timestamps_missing_for_one_or_more_messages")
 
+    known_times = [message.timestamp for message in messages if message.timestamp is not None]
+    chronology_valid = True
+    try:
+        chronology_valid = all(a <= b for a, b in zip(known_times, known_times[1:], strict=False))
+    except TypeError:
+        chronology_valid = False
+        timing_errors.append("mixed_naive_and_aware_timestamps")
+    if not chronology_valid:
+        timing_errors.append("timestamps_not_comparable_or_out_of_order")
+        timing_available = False
+
     first_response_seconds: float | None = None
     first_response_evaluable = False
     first_response_violation: bool | None = None
@@ -88,22 +97,15 @@ def run_preflight(
         ),
         None,
     )
-    if connect_message and connect_message.timestamp:
+    if chronology_valid and connect_message and connect_message.timestamp:
+        connect_index = messages.index(connect_message)
         response = next(
-            (
-                message
-                for message in messages
-                if message.role == "agent"
-                and message.timestamp
-                and message.timestamp >= connect_message.timestamp
-            ),
+            (message for message in messages[connect_index + 1 :] if message.role == "agent"),
             None,
         )
-        if response:
+        if response and response.timestamp:
             first_response_evaluable = True
-            first_response_seconds = _elapsed_seconds(
-                connect_message.timestamp, response.timestamp
-            )
+            first_response_seconds = _elapsed_seconds(connect_message.timestamp, response.timestamp)
             first_response_violation = (
                 first_response_seconds > config["timing"]["first_response_max_seconds"]
             )
@@ -122,6 +124,8 @@ def run_preflight(
                 None,
             )
             if response is None:
+                timing_available = False
+                timing_errors.append("unanswered_user_message_without_session_end_time")
                 continue
             elapsed = _elapsed_seconds(message.timestamp, response.timestamp)
             if elapsed > config["timing"]["message_response_max_seconds"]:

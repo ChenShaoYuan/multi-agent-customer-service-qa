@@ -1,4 +1,4 @@
-"""LangGraph shared state for the week-two workflow."""
+"""LangGraph state with isolated scoring branches and append-only trace reducers."""
 
 import operator
 from typing import Annotated, Literal, TypedDict
@@ -17,6 +17,9 @@ class AuditState(TypedDict, total=False):
     preflight_report: dict
     redline_result: dict
     gate_status: Literal["pass", "blocked", "review"]
+    service_process_result: dict
+    professional_service_result: dict
+    communication_result: dict
     node_traces: Annotated[list[dict], operator.add]
     technical_errors: Annotated[list[dict], operator.add]
     final_audit: dict

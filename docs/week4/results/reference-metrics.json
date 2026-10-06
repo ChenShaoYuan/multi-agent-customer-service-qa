@@ -1,0 +1,212 @@
+{
+  "record_count": 12,
+  "final_schema_valid_count": 12,
+  "final_schema_valid_rate": 1.0,
+  "status_counts": {
+    "completed": 6,
+    "blocked": 3,
+    "manual_review": 3
+  },
+  "dimension_status_counts": {
+    "service_process:completed": 8,
+    "professional_service:completed": 7,
+    "communication:completed": 7,
+    "communication:partial": 1,
+    "professional_service:manual_review": 1
+  },
+  "records_with_technical_errors": 0,
+  "alert_counts": {
+    "REDLINE_TRIGGERED": 3,
+    "DIMENSION_INCOMPLETE": 2,
+    "PREFLIGHT_INVALID": 1
+  },
+  "latency_seconds": {
+    "mean": 10.307,
+    "p50": 12.887,
+    "p95": 16.091
+  },
+  "business_accuracy": null,
+  "accuracy_note": "无人工金标时不能报告业务准确率。运行契约通过率含受控复核结果。",
+  "reference_comparison": {
+    "label_status": "rule_authored_not_human_reviewed",
+    "count": 12,
+    "gate_agreement": 1.0,
+    "grade_agreement": 1.0,
+    "redline_precision": 1.0,
+    "redline_recall": 1.0,
+    "score_mae_on_scorable_pairs": 0.0,
+    "scorable_pair_count": 6,
+    "cases": [
+      {
+        "index": 0,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 100
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 100.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      },
+      {
+        "index": 1,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 96
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 96.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      },
+      {
+        "index": 2,
+        "expected": {
+          "gate_status": "blocked",
+          "grade": "严重不合格",
+          "total_score": null
+        },
+        "actual_gate": "blocked",
+        "actual_grade": "严重不合格",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": []
+      },
+      {
+        "index": 3,
+        "expected": {
+          "gate_status": "blocked",
+          "grade": "严重不合格",
+          "total_score": null
+        },
+        "actual_gate": "blocked",
+        "actual_grade": "严重不合格",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": []
+      },
+      {
+        "index": 4,
+        "expected": {
+          "gate_status": "blocked",
+          "grade": "严重不合格",
+          "total_score": null
+        },
+        "actual_gate": "blocked",
+        "actual_grade": "严重不合格",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": []
+      },
+      {
+        "index": 5,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 100
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 100.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      },
+      {
+        "index": 6,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 92
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 92.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      },
+      {
+        "index": 7,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 92
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 92.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      },
+      {
+        "index": 8,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "待人工复核",
+          "total_score": null
+        },
+        "actual_gate": "pass",
+        "actual_grade": "待人工复核",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": [
+          "communication: CM-03: 缺少有效时间戳或人工接入事件，无法评估。",
+          "communication: CM-04: 缺少有效时间戳或人工接入事件，无法评估。"
+        ]
+      },
+      {
+        "index": 9,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "待人工复核",
+          "total_score": null
+        },
+        "actual_gate": "pass",
+        "actual_grade": "待人工复核",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": [
+          "professional_service: 一级标签不在规则库中，需确认标签后重跑。"
+        ]
+      },
+      {
+        "index": 10,
+        "expected": {
+          "gate_status": "review",
+          "grade": "待人工复核",
+          "total_score": null
+        },
+        "actual_gate": "review",
+        "actual_grade": "待人工复核",
+        "actual_score": null,
+        "score_absolute_error": null,
+        "review_reasons": [
+          "预检结果缺失、无效或输入不完整。"
+        ]
+      },
+      {
+        "index": 11,
+        "expected": {
+          "gate_status": "pass",
+          "grade": "优秀",
+          "total_score": 100
+        },
+        "actual_gate": "pass",
+        "actual_grade": "优秀",
+        "actual_score": 100.0,
+        "score_absolute_error": 0.0,
+        "review_reasons": []
+      }
+    ]
+  },
+  "run_fingerprint": "9e8a905696ee71de39cd8257ff06cf561cd8dae333ede4f183219680d69b5f7b",
+  "evaluation_mode": "live",
+  "workers": 2,
+  "records_resumed": 12,
+  "records_executed": 0,
+  "execution_wall_seconds": 0.008,
+  "generated_at": "2026-10-05T04:57:59.513186+00:00"
+}

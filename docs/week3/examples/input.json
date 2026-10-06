@@ -1,0 +1,37 @@
+{
+  "ticket_id": "DEMO-W3-001",
+  "parent_tag": "账户安全",
+  "tag": "账户-登录异常",
+  "messages": [
+    {
+      "message_id": "m001",
+      "role": "system",
+      "content": "正在连接客服",
+      "timestamp": "2026-09-27T10:00:00+08:00"
+    },
+    {
+      "message_id": "m002",
+      "role": "end-user",
+      "content": "我的账户无法登录，提示密码错误。",
+      "timestamp": "2026-09-27T10:00:10+08:00"
+    },
+    {
+      "message_id": "m003",
+      "role": "agent",
+      "content": "您好，请先使用登录页的忘记密码功能立即重置密码。",
+      "timestamp": "2026-09-27T10:00:30+08:00"
+    },
+    {
+      "message_id": "m004",
+      "role": "end-user",
+      "content": "重置后已经可以登录，问题解决了。",
+      "timestamp": "2026-09-27T10:00:40+08:00"
+    },
+    {
+      "message_id": "m005",
+      "role": "agent",
+      "content": "感谢您的反馈，祝您生活愉快，再见。",
+      "timestamp": "2026-09-27T10:00:50+08:00"
+    }
+  ]
+}

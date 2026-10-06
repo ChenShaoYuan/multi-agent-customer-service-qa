@@ -44,12 +44,16 @@ def _structured_messages(
             errors.append(f"message_{index}_invalid_role:{raw_role or 'missing'}")
             continue
 
-        content = str(raw_message.get("content", "")).strip()
-        if not content:
+        raw_content = raw_message.get("content")
+        if not isinstance(raw_content, str) or not raw_content.strip():
             errors.append(f"message_{index}_empty_content")
             continue
+        content = raw_content.strip()
 
         message_id = str(raw_message.get("message_id") or f"m{index:03d}").strip()
+        if not message_id or any(message.message_id == message_id for message in messages):
+            errors.append(f"message_{index}_invalid_or_duplicate_id")
+            continue
         timestamp = raw_message.get("timestamp")
         try:
             messages.append(
@@ -93,9 +97,7 @@ def normalize_input(payload: Mapping[str, Any]) -> NormalizedConversation:
     warnings: list[str] = []
     ticket_id = _required_text(_value(payload, "ticket_id", "ticketId"), "ticket_id", errors)
     tag = _required_text(payload.get("tag"), "tag", errors)
-    parent_tag = _required_text(
-        _value(payload, "parent_tag", "parentTag"), "parent_tag", errors
-    )
+    parent_tag = _required_text(_value(payload, "parent_tag", "parentTag"), "parent_tag", errors)
 
     raw_messages = payload.get("messages")
     if isinstance(raw_messages, list) and raw_messages:

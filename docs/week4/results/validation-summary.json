@@ -1,0 +1,51 @@
+{
+  "history_technical_record_indices": [
+    1,
+    11,
+    25,
+    26,
+    27,
+    28,
+    32,
+    34,
+    50,
+    51,
+    56,
+    63,
+    65,
+    66,
+    69,
+    74,
+    78,
+    82,
+    83,
+    84,
+    85,
+    94,
+    99
+  ],
+  "history_error_counts": [
+    {
+      "node": "service_process",
+      "error_type": "ValueError",
+      "count": 19
+    },
+    {
+      "node": "professional_service",
+      "error_type": "ValueError",
+      "count": 21
+    }
+  ],
+  "history_review_reason_counts": {
+    "communication: CM-03: 缺少有效时间戳或人工接入事件，无法评估。": 100,
+    "communication: CM-04: 缺少有效时间戳或人工接入事件，无法评估。": 100,
+    "service_process: 重试耗尽，请人工复核。": 6,
+    "professional_service: 重试耗尽，请人工复核。": 9
+  },
+  "history_rule_tool_transport_counts": {
+    "mcp": 100
+  },
+  "pytest_passed": 122,
+  "coverage_percent": 87.92866941015089,
+  "coverage_note": "主测试进程覆盖率不包含MCP服务器子进程；真实模型评测不计入覆盖率。"
+}

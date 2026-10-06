@@ -1,0 +1,35 @@
+{
+  "record_count": 100,
+  "final_schema_valid_count": 100,
+  "final_schema_valid_rate": 1.0,
+  "status_counts": {
+    "manual_review": 100
+  },
+  "dimension_status_counts": {
+    "service_process:completed": 94,
+    "professional_service:completed": 91,
+    "communication:partial": 100,
+    "service_process:technical_error": 6,
+    "professional_service:technical_error": 9
+  },
+  "records_with_technical_errors": 23,
+  "alert_counts": {
+    "DIMENSION_INCOMPLETE": 115,
+    "ROLES_INFERRED": 100,
+    "NODE_ATTEMPT_FAILED": 40
+  },
+  "latency_seconds": {
+    "mean": 17.781,
+    "p50": 16.073,
+    "p95": 26.427
+  },
+  "business_accuracy": null,
+  "accuracy_note": "无人工金标时不能报告业务准确率。运行契约通过率含受控复核结果。",
+  "run_fingerprint": "9e8a905696ee71de39cd8257ff06cf561cd8dae333ede4f183219680d69b5f7b",
+  "evaluation_mode": "live",
+  "workers": 2,
+  "records_resumed": 21,
+  "records_executed": 79,
+  "execution_wall_seconds": 732.769,
+  "generated_at": "2026-10-05T05:10:12.283965+00:00"
+}

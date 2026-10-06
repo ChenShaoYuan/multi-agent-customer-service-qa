@@ -1,0 +1,521 @@
+{
+  "audit_id": "f83d580d-3c98-44d5-9b75-100122361fc7",
+  "ticket_id": "DEMO-W3-001",
+  "week": 3,
+  "status": "dimensions_completed",
+  "grade": "待第四周汇总",
+  "total_score": null,
+  "redline": {
+    "items": [
+      {
+        "rule_id": "CR-01",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-02",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-03",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-04",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      }
+    ],
+    "triggered": false,
+    "gate_status": "pass",
+    "summary": "离线演示：固定返回值，仅验证工作流。"
+  },
+  "preflight": {
+    "input_valid": true,
+    "input_errors": [],
+    "role_source": "provided",
+    "timing_available": true,
+    "timing_errors": [],
+    "conversation_stats": {
+      "message_count": 5,
+      "user_count": 2,
+      "agent_count": 2,
+      "system_count": 1,
+      "turn_count": 2
+    },
+    "greeting": {
+      "evaluable": true,
+      "present": true,
+      "message_id": "m003"
+    },
+    "closing": {
+      "evaluable": true,
+      "present": true,
+      "message_id": "m005"
+    },
+    "first_response_seconds": 30.0,
+    "first_response_evaluable": true,
+    "first_response_violation": false,
+    "response_time_violations": [],
+    "redline_keyword_hits": [],
+    "sensitive_data_hits": [],
+    "tag_warnings": [],
+    "repeated_reply_message_ids": [],
+    "transfer_events": []
+  },
+  "dimensions": {
+    "service_process": {
+      "dimension": "service_process",
+      "status": "completed",
+      "raw_score": 20,
+      "max_score": 25,
+      "score_text": "20/25",
+      "evaluated_score": 20,
+      "evaluated_max_score": 25,
+      "fallback_score": null,
+      "items": [
+        {
+          "item_id": "SP-01",
+          "name": "热情迎接",
+          "status": "scored",
+          "score": 0,
+          "max_score": 5,
+          "score_text": "0/5",
+          "deduction": 5,
+          "reason": "仅问好并直接提供方案，缺少完整欢迎语，扣5分。",
+          "rule_ids": [
+            "SP-01"
+          ],
+          "rule_texts": [
+            "发送完整规范欢迎语得5分；仅“您好/Hi”或无欢迎语得0分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "SP-02",
+          "name": "了解需求",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "针对密码错误给出恢复路径，用户确认解决。",
+          "rule_ids": [
+            "SP-02"
+          ],
+          "rule_texts": [
+            "准确理解定位需求，获取必要信息得5分；客服已确认但用户不回复不扣分；误解需求或方向错误0分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "SP-03",
+          "name": "完整回复",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "用户确认问题已解决。",
+          "rule_ids": [
+            "SP-03"
+          ],
+          "rule_texts": [
+            "完整解答、用户确认解决、正确升级工单、合理回复合规问题或因用户缺信息无法继续均5分；明确问题完全未回应处理0分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m004",
+              "quote": "重置后已经可以登录，问题解决了。"
+            }
+          ]
+        },
+        {
+          "item_id": "SP-04",
+          "name": "正确标签",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "账户登录问题与账户安全、登录异常标签语义一致。",
+          "rule_ids": [
+            "SP-04"
+          ],
+          "rule_texts": [
+            "标签与咨询语义一致5分，遗漏或错误0分；没有正式标签目录时只能判断语义一致性。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m002",
+              "quote": "我的账户无法登录，提示密码错误。"
+            }
+          ]
+        },
+        {
+          "item_id": "SP-05",
+          "name": "礼貌送客",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "客服明确致谢并礼貌送别。",
+          "rule_ids": [
+            "SP-05"
+          ],
+          "rule_texts": [
+            "礼貌结束、系统自动关闭、询问或提供方案后有证据等待5分钟无回复可5分；直接结束且无礼貌表达0分；记录截断不推定结束。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m005",
+              "quote": "感谢您的反馈，祝您生活愉快，再见。"
+            }
+          ]
+        }
+      ],
+      "review_reasons": [],
+      "errors": [],
+      "attempts": 1,
+      "tool_trace": []
+    },
+    "professional_service": {
+      "dimension": "professional_service",
+      "status": "completed",
+      "raw_score": 50,
+      "max_score": 50,
+      "score_text": "50/50",
+      "evaluated_score": 50,
+      "evaluated_max_score": 50,
+      "fallback_score": null,
+      "items": [
+        {
+          "item_id": "PS-01",
+          "name": "分析问题并解答",
+          "status": "scored",
+          "score": 30,
+          "max_score": 30,
+          "score_text": "30/30",
+          "deduction": 0,
+          "reason": "客服明确引导立即重置密码，用户确认恢复，无适用扣分。",
+          "rule_ids": [
+            "PS-01",
+            "PS-025CE938-A01"
+          ],
+          "rule_texts": [
+            "从30分按当前类别的A类专业条款扣分，下限0；所有专业免责条件优先；不凭常识虚构平台政策。",
+            "用户反馈登录异常/账户被盗时，客服未明确引导用户立即修改密码，扣10分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "PS-02",
+          "name": "服务意识",
+          "status": "scored",
+          "score": 10,
+          "max_score": 10,
+          "score_text": "10/10",
+          "deduction": 0,
+          "reason": "针对安全问题主动提供第一步保护操作。",
+          "rule_ids": [
+            "PS-02",
+            "PS-025CE938-S01"
+          ],
+          "rule_texts": [
+            "从10分按当前类别S类条款扣分，下限0；用户多次问同一问题仍被要求重述扣5分；必要核实、系统阶段重复和合理纠正不扣。",
+            "安全类紧急问题（账户被盗、未授权操作），客服未主动引导用户执行第一步保护操作，扣5分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "PS-03",
+          "name": "沟通反馈",
+          "status": "scored",
+          "score": 10,
+          "max_score": 10,
+          "score_text": "10/10",
+          "deduction": 0,
+          "reason": "原始规则规定默认满分。",
+          "rule_ids": [
+            "PS-03"
+          ],
+          "rule_texts": [
+            "原始Prompt规定沟通反馈默认满分10分，不自行新增扣分规则。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        }
+      ],
+      "review_reasons": [],
+      "errors": [],
+      "attempts": 1,
+      "tool_trace": [
+        {
+          "tool": "get_professional_rules",
+          "status": "success",
+          "source": "data/raw/professional-rules.json",
+          "version": "7b7b8cca6f78",
+          "rule_count": 10
+        }
+      ]
+    },
+    "communication": {
+      "dimension": "communication",
+      "status": "completed",
+      "raw_score": 25,
+      "max_score": 25,
+      "score_text": "25/25",
+      "evaluated_score": 25,
+      "evaluated_max_score": 25,
+      "fallback_score": null,
+      "items": [
+        {
+          "item_id": "CM-01",
+          "name": "规范用语",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "使用您、请等礼貌表达，无责备或推卸。",
+          "rule_ids": [
+            "CM-01"
+          ],
+          "rule_texts": [
+            "请、您等礼貌用语，语言温和，无责备或推卸，全部符合5分，任一违反0分；语义判断而非逐句强制包含“请”。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "CM-02",
+          "name": "语言文字规范",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "表达通顺，未出现重复标点或负面表情。",
+          "rule_ids": [
+            "CM-02"
+          ],
+          "rule_texts": [
+            "无错字或语法问题，标点规范、无重复标点和负面表情，发现错误及时更正可合规；符合5分，否则0分，忽略HTML空格。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "CM-03",
+          "name": "接入时效",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "人工接入后30秒内回复，符合90秒上限。",
+          "rule_ids": [
+            "CM-03"
+          ],
+          "rule_texts": [
+            "system连接人工事件至首条人工回复不超过90秒得5分，超过0分；缺事件或有效时间为不可评估。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "CM-04",
+          "name": "回复时效",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "两次用户消息均在300秒内得到回复。",
+          "rule_ids": [
+            "CM-04"
+          ],
+          "rule_texts": [
+            "用户待回复消息至下一人工回复不超过300秒得5分；超过且无合理说明0分；主动说明延迟原因或及时纠错解释可免责。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        },
+        {
+          "item_id": "CM-05",
+          "name": "转接规范",
+          "status": "scored",
+          "score": 5,
+          "max_score": 5,
+          "score_text": "5/5",
+          "deduction": 0,
+          "reason": "未出现人工转接行为。",
+          "rule_ids": [
+            "CM-05"
+          ],
+          "rule_texts": [
+            "人工转接前有规范话术且无不必要错误转接得5分，否则0分；机器人转人工不计入评分，没有人工转接行为不扣分。"
+          ],
+          "evidence": [
+            {
+              "message_id": "m003",
+              "quote": "您好，请先使用登录页的忘记密码功能立即重置密码。"
+            }
+          ]
+        }
+      ],
+      "review_reasons": [],
+      "errors": [],
+      "attempts": 1,
+      "tool_trace": []
+    }
+  },
+  "ready_for_summary": true,
+  "manual_review_reasons": [],
+  "technical_errors": [],
+  "trace": [
+    {
+      "node": "normalize_input",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.342563Z",
+      "duration_ms": 0.052,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {
+        "message_count": 5
+      }
+    },
+    {
+      "node": "preflight",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.342563Z",
+      "duration_ms": 4.029,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {
+        "input_valid": true
+      }
+    },
+    {
+      "node": "critical_gate",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.347076Z",
+      "duration_ms": 0.041,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "gate_status": "pass"
+      }
+    },
+    {
+      "node": "communication",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.348075Z",
+      "duration_ms": 7.899,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "result_status": "completed",
+        "attempts": 1,
+        "rule_lookup_status": null
+      }
+    },
+    {
+      "node": "professional_service",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.348075Z",
+      "duration_ms": 10.348,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "result_status": "completed",
+        "attempts": 1,
+        "rule_lookup_status": "success"
+      }
+    },
+    {
+      "node": "service_process",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.352076Z",
+      "duration_ms": 4.729,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "result_status": "completed",
+        "attempts": 1,
+        "rule_lookup_status": null
+      }
+    },
+    {
+      "node": "collect_dimensions",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.359510Z",
+      "duration_ms": 0.048,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {}
+    }
+  ],
+  "evaluation_mode": "offline_demo"
+}

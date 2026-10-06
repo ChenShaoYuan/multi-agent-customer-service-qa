@@ -35,12 +35,11 @@ flowchart TD
 在 `.env` 填写 `LLM_API_KEY` 后执行：
 
 ```powershell
-.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0
+.\.venv\Scripts\python.exe -m customer_service_qa --sample-index 0 --week 2
 ```
 
 没有密钥、模型超时或结构校验失败时，工作流输出 `manual_review`，不会将技术错误解释为客服0分。
 
 ## Scope boundary
 
-`pass` 分支当前返回 `ready_for_dimension_audit`。服务流程、专业服务和沟通规范三个评分 Agent 属于第三周范围。
-
+`build_week2_graph()` 和 `--week 2` 保留第二周版本，`pass` 分支返回 `ready_for_dimension_audit`。第三周实现见 [Week 3](../week3/README.md)，CLI 默认已使用第三周图。
