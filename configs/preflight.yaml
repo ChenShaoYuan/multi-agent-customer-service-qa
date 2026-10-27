@@ -31,4 +31,19 @@ redline:
     - {id: CR-02, name: conflict_or_abusive_communication}
     - {id: CR-03, name: information_security_violation}
     - {id: CR-04, name: unauthorized_action}
+  keywords:
+    CR-01: ["不归我们管", "自己解决", "没办法处理", "别再问了"]
+    CR-02: ["蠢", "滚", "闭嘴", "威胁你", "爱用不用"]
+    CR-03: ["内部数据", "公司机密", "其他客户的手机号", "竞品平台"]
+    CR-04: ["直接拉黑", "保证赔付", "保证退款", "绕过审核"]
 
+patterns:
+  greeting: ["您好", "你好", "感谢您联系", "很高兴为您服务", "hello", "hi"]
+  closing: ["感谢", "祝您", "随时联系", "欢迎再次", "再见", "have a nice day"]
+  connect_agent: ["正在连接客服", "正在为您转接", "connecting to an agent"]
+  transfer: ["为您转接", "转接至", "转交", "transfer"]
+
+sensitive_patterns:
+  phone: '(?<!\d)1[3-9]\d{9}(?!\d)'
+  national_id: '(?<!\d)\d{17}[\dXx](?!\d)'
+  api_token: '(?i)\b(?:sk|api)[-_][A-Za-z0-9_-]{12,}\b'

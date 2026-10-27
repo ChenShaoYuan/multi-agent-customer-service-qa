@@ -45,4 +45,3 @@ def test_preflight_configuration_is_consistent() -> None:
     assert config["timing"]["message_response_max_seconds"] == 300
     assert len(config["checks"]) == 14
     assert config["redline"]["keyword_hit_is_final_decision"] is False
-

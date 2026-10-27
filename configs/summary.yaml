@@ -1,0 +1,28 @@
+version: "1.0.0"
+grade_feedback:
+  优秀: 服务整体达到优秀标准，请保持表现并关注扣分细节。
+  合格: 服务达到基本要求，请针对已列问题进行改进并安排复查。
+  严重问题: 服务质量存在明显问题，请按扣分证据安排专项培训和复核。
+deduplication:
+  policy: keep_largest_weighted_penalty
+  require_shared_evidence: true
+  # Shared evidence alone is NOT sufficient: the summary Agent must confirm the same cause.
+  allowed_item_pairs:
+    - [SP-02, PS-01]
+    - [SP-03, PS-01]
+    - [SP-03, CM-04]
+    - [PS-02, CM-01]
+feedback:
+  SP-01: 首次人工回复应使用完整欢迎表达，再进入问题处理。
+  SP-02: 先确认用户的实际问题及必要信息，避免误判需求。
+  SP-03: 回应全部明确问题，不能解决时说明处理或升级路径。
+  SP-04: 根据会话主要问题核对一级和二级标签。
+  SP-05: 问题解决或合规结束时补充礼貌收尾。
+  PS-01: 按当前业务条款补齐遗漏的处理步骤与解释。
+  PS-02: 主动提供必要帮助，避免重复索取已提供的信息。
+  PS-03: 按业务规范保持明确的沟通反馈。
+  CM-01: 使用尊重用户的表达，避免责备、推诿或敷衍。
+  CM-02: 检查文字、标点和表情，发现错误及时更正。
+  CM-03: 在人工接入后90秒内首次回复。
+  CM-04: 及时回复待处理消息，必要延迟应主动说明原因。
+  CM-05: 转接前说明原因和去向，避免无效或错误转接。

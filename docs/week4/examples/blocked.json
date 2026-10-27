@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.0.0",
+  "week": 4,
+  "audit_id": "a10c7302-076c-4552-9064-3f90c7b9c5fc",
+  "ticket_id": "DEMO-W3-001",
+  "status": "blocked",
+  "grade": "严重不合格",
+  "total_score": null,
+  "redline": {
+    "items": [
+      {
+        "rule_id": "CR-01",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-02",
+        "triggered": true,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": [
+          "m003"
+        ]
+      },
+      {
+        "rule_id": "CR-03",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-04",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      }
+    ],
+    "triggered": true,
+    "gate_status": "blocked",
+    "summary": "离线演示：固定返回值，仅验证工作流。"
+  },
+  "preflight": {
+    "input_valid": true,
+    "input_errors": [],
+    "role_source": "provided",
+    "timing_available": true,
+    "timing_errors": [],
+    "conversation_stats": {
+      "message_count": 5,
+      "user_count": 2,
+      "agent_count": 2,
+      "system_count": 1,
+      "turn_count": 2
+    },
+    "greeting": {
+      "evaluable": true,
+      "present": false,
+      "message_id": "m003"
+    },
+    "closing": {
+      "evaluable": true,
+      "present": true,
+      "message_id": "m005"
+    },
+    "first_response_seconds": 30.0,
+    "first_response_evaluable": true,
+    "first_response_violation": false,
+    "response_time_violations": [],
+    "redline_keyword_hits": [],
+    "sensitive_data_hits": [],
+    "tag_warnings": [],
+    "repeated_reply_message_ids": [],
+    "transfer_events": []
+  },
+  "dimensions": {},
+  "adjusted_raw_scores": {},
+  "weighted_scores": {},
+  "findings": [],
+  "duplicate_resolutions": [],
+  "feedback": [
+    {
+      "issue_id": null,
+      "item_ids": [],
+      "advice": "核对红线证据，立即纠正相关行为并开展专项培训。",
+      "rule_ids": [
+        "CR-02"
+      ],
+      "evidence_message_ids": [
+        "m003"
+      ]
+    }
+  ],
+  "manual_review_reasons": [],
+  "alerts": [
+    {
+      "code": "REDLINE_TRIGGERED",
+      "severity": "error",
+      "node": "critical_gate",
+      "message": "红线命中，停止三维评分并优先人工核查。"
+    }
+  ],
+  "technical_errors": [],
+  "trace": [
+    {
+      "node": "normalize_input",
+      "status": "success",
+      "started_at": "2026-10-05T05:01:52.750504Z",
+      "duration_ms": 0.037,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.3.0",
+      "model_name": null,
+      "details": {
+        "message_count": 5
+      }
+    },
+    {
+      "node": "preflight",
+      "status": "success",
+      "started_at": "2026-10-05T05:01:52.750504Z",
+      "duration_ms": 0.076,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.3.0",
+      "model_name": null,
+      "details": {
+        "input_valid": true
+      }
+    },
+    {
+      "node": "critical_gate",
+      "status": "success",
+      "started_at": "2026-10-05T05:01:52.750504Z",
+      "duration_ms": 0.05,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.3.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "gate_status": "blocked"
+      }
+    },
+    {
+      "node": "summary_agent",
+      "status": "success",
+      "started_at": "2026-10-05T05:01:52.752009Z",
+      "duration_ms": 0.051,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.3.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "status": "blocked",
+        "tool_steps": 0
+      }
+    }
+  ],
+  "react_steps": [],
+  "scoring_version": "0.1.0",
+  "summary_version": "1.0.0",
+  "evaluation_mode": "offline_demo"
+}

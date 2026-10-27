@@ -1,0 +1,127 @@
+{
+  "audit_id": "8de853b8-642b-42ca-9e53-0ad5861fb93c",
+  "ticket_id": "DEMO-W3-001",
+  "status": "blocked",
+  "grade": "严重不合格",
+  "redline": {
+    "items": [
+      {
+        "rule_id": "CR-01",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-02",
+        "triggered": true,
+        "reason": "合成示例中的客服明确辱骂用户。",
+        "evidence_message_ids": [
+          "m003"
+        ]
+      },
+      {
+        "rule_id": "CR-03",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      },
+      {
+        "rule_id": "CR-04",
+        "triggered": false,
+        "reason": "离线示例预设无红线。",
+        "evidence_message_ids": []
+      }
+    ],
+    "triggered": true,
+    "gate_status": "blocked",
+    "summary": "离线预设：CR-02命中，跳过三个维度。"
+  },
+  "preflight": {
+    "input_valid": true,
+    "input_errors": [],
+    "role_source": "provided",
+    "timing_available": true,
+    "timing_errors": [],
+    "conversation_stats": {
+      "message_count": 5,
+      "user_count": 2,
+      "agent_count": 2,
+      "system_count": 1,
+      "turn_count": 2
+    },
+    "greeting": {
+      "evaluable": true,
+      "present": false,
+      "message_id": "m003"
+    },
+    "closing": {
+      "evaluable": true,
+      "present": true,
+      "message_id": "m005"
+    },
+    "first_response_seconds": 30.0,
+    "first_response_evaluable": true,
+    "first_response_violation": false,
+    "response_time_violations": [],
+    "redline_keyword_hits": [],
+    "sensitive_data_hits": [],
+    "tag_warnings": [],
+    "repeated_reply_message_ids": [],
+    "transfer_events": []
+  },
+  "ready_for_dimension_audit": false,
+  "manual_review_reasons": [],
+  "trace": [
+    {
+      "node": "normalize_input",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.397279Z",
+      "duration_ms": 0.036,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {
+        "message_count": 5
+      }
+    },
+    {
+      "node": "preflight",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.397279Z",
+      "duration_ms": 0.072,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {
+        "input_valid": true
+      }
+    },
+    {
+      "node": "critical_gate",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.397279Z",
+      "duration_ms": 0.057,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": "offline-fixture",
+      "details": {
+        "gate_status": "blocked"
+      }
+    },
+    {
+      "node": "finalize_blocked",
+      "status": "success",
+      "started_at": "2026-09-26T17:42:42.398221Z",
+      "duration_ms": 0.0,
+      "retry_count": 0,
+      "rule_version": "0.1.0",
+      "prompt_version": "0.1.0",
+      "model_name": null,
+      "details": {}
+    }
+  ],
+  "evaluation_mode": "offline_demo"
+}
