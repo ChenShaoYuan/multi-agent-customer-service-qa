@@ -33,3 +33,7 @@ logs/
 outputs/
 checkpoints/
 
+# Personal learning notes (project delivery documentation remains tracked)
+/项目1_*.md
+/*-file-guide.md
+
